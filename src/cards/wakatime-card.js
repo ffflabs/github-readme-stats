@@ -44,23 +44,23 @@ const createTextNode = ({
   labelWidth = 150,
 }) => {
   const staggerDelay = (index + 3) * 150;
-  
-    /**
+
+  /**
    * The values column x position is calculated as
-   * labelWidth (defaults to 150) 
+   * labelWidth (defaults to 150)
    * + 20 (if hideProgress is true)
    * + 200 otherwise
    */
-  const valuesOffset=labelWidth+(hideProgress ? 20:200);
-    const cardProgress = hideProgress
-      ? null
-      : createProgressNode({
-          progress: percent,
-          color: progressBarColor,
-          width: 220,
-          name: label,
-          progressBarBackgroundColor,
-        });
+  const valuesOffset = labelWidth + (hideProgress ? 20 : 200);
+  const cardProgress = hideProgress
+    ? null
+    : createProgressNode({
+        progress: percent,
+        color: progressBarColor,
+        width: 220,
+        name: label,
+        progressBarBackgroundColor,
+      });
 
   return `
     <g class="stagger" style="animation-delay: ${staggerDelay}ms" transform="translate(25, 0)">
@@ -89,7 +89,7 @@ const renderWakatimeCard = (stats = {}, options = { hide: [] }) => {
     theme = "default",
     hide_progress,
     card_width,
-    label_width=150,
+    label_width = 150,
     langs_count = 0,
   } = options;
 

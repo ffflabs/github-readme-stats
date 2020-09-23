@@ -28,7 +28,7 @@ module.exports = async (req, res) => {
     theme,
     card_width,
     cache_seconds,
-    label_width=150
+    label_width = 150,
   } = req.query;
   let stats;
 
@@ -66,8 +66,8 @@ module.exports = async (req, res) => {
         icon_color,
         text_color,
         bg_color,
-        card_width,
-        label_width,
+        card_width: parseInt(card_width, 10),
+        label_width: parseInt(label_width, 10),
         theme,
       })
     );

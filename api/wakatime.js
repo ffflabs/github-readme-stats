@@ -54,7 +54,8 @@ module.exports = async (req, res) => {
         bg_color,
         theme,
         hide_progress,
-        card_width,
+        card_width:parseInt(card_width, 10),
+        label_width:parseInt(label_width, 10),
         langs_count
       })
     );
