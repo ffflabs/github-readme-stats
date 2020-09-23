@@ -22,6 +22,7 @@ module.exports = async (req, res) => {
     hide_title,
     hide_progress,
     card_width,
+    label_width=150,
     langs_count
   } = req.query;
 

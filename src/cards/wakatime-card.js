@@ -41,25 +41,33 @@ const createTextNode = ({
   hideProgress,
   progressBarColor,
   progressBarBackgroundColor,
+  labelWidth = 150,
 }) => {
   const staggerDelay = (index + 3) * 150;
-
-  const cardProgress = hideProgress
-    ? null
-    : createProgressNode({
-        progress: percent,
-        color: progressBarColor,
-        width: 220,
-        name: label,
-        progressBarBackgroundColor,
-      });
+  
+    /**
+   * The values column x position is calculated as
+   * labelWidth (defaults to 150) 
+   * + 20 (if hideProgress is true)
+   * + 200 otherwise
+   */
+  const valuesOffset=labelWidth+(hideProgress ? 20:200);
+    const cardProgress = hideProgress
+      ? null
+      : createProgressNode({
+          progress: percent,
+          color: progressBarColor,
+          width: 220,
+          name: label,
+          progressBarBackgroundColor,
+        });
 
   return `
     <g class="stagger" style="animation-delay: ${staggerDelay}ms" transform="translate(25, 0)">
       <text class="stat bold" y="12.5">${label}:</text>
       <text 
         class="stat" 
-        x="${hideProgress ? 170 : 350}" 
+        x="${valuesOffset}" 
         y="12.5" 
         data-testid="${id}"
       >${value}</text>
@@ -81,7 +89,8 @@ const renderWakatimeCard = (stats = {}, options = { hide: [] }) => {
     theme = "default",
     hide_progress,
     card_width,
-    langs_count=0
+    label_width=150,
+    langs_count = 0,
   } = options;
 
   const lheight = parseInt(line_height, 10);
@@ -106,9 +115,11 @@ const renderWakatimeCard = (stats = {}, options = { hide: [] }) => {
             percent: language.percent,
             progressBarColor: titleColor,
             progressBarBackgroundColor: textColor,
+            labelWidth: label_width,
             hideProgress: hide_progress,
           });
-        }).slice(0,langs_count)
+        })
+        .slice(0, langs_count)
     : [];
 
   // Calculate the card height depending on how many items there are
@@ -120,7 +131,7 @@ const renderWakatimeCard = (stats = {}, options = { hide: [] }) => {
     textColor,
     iconColor,
   });
-  let width = isNaN(card_width) ? (hide_progress? 310 : 495) : card_width;
+  let width = isNaN(card_width) ? (hide_progress ? 310 : 495) : card_width;
 
   const card = new Card({
     title: "Wakatime week stats",

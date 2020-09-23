@@ -16,11 +16,19 @@ const createTextNode = ({
   index,
   showIcons,
   shiftValuePos,
+  labelWidth=170
 }) => {
   const kValue = kFormatter(value);
   const staggerDelay = (index + 3) * 150;
 
   const labelOffset = showIcons ? `x="25"` : "";
+  /**
+   * The values column x position is calculated as
+   * labelWidth (defaults to 150) 
+   * + 50 (if shiftValuePos && showIcons are true)
+   * + 20 (if shiftValuePos is true but showIcons is false)
+   */
+  const valuesOffset=labelWidth+(shiftValuePos ? (showIcons ? 50 : 20) : 0);
   const iconSvg = showIcons
     ? `
     <svg data-testid="icon" class="icon" viewBox="0 0 16 16" version="1.1" width="16" height="16">
@@ -34,7 +42,7 @@ const createTextNode = ({
       <text class="stat bold" ${labelOffset} y="12.5">${label}:</text>
       <text 
         class="stat" 
-        x="${shiftValuePos ? (showIcons ? 200 : 170) : 150}" 
+        x="${valuesOffset}" 
         y="12.5" 
         data-testid="${id}"
       >${kValue}</text>
@@ -65,6 +73,7 @@ const renderStatsCard = (stats = {}, options = { hide: [] }) => {
     text_color,
     bg_color,
     card_width,
+    label_width=170,
     theme = "default",
   } = options;
 
@@ -124,6 +133,7 @@ const renderStatsCard = (stats = {}, options = { hide: [] }) => {
         ...STATS[key],
         index,
         showIcons: show_icons,
+        labelWidth: label_width,
         shiftValuePos: !include_all_commits,
       })
     );
