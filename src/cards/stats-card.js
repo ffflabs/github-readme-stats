@@ -64,6 +64,7 @@ const renderStatsCard = (stats = {}, options = { hide: [] }) => {
     icon_color,
     text_color,
     bg_color,
+    card_width,
     theme = "default",
   } = options;
 
@@ -164,11 +165,11 @@ const renderStatsCard = (stats = {}, options = { hide: [] }) => {
     show_icons,
     progress,
   });
-
+  let width = isNaN(card_width) ? (hide_rank ? 295 : 495) : card_width;
   const apostrophe = ["x", "s"].includes(name.slice(-1)) ? "" : "s";
   const card = new Card({
     title: `${encodeHTML(name)}'${apostrophe} GitHub Stats`,
-    width: hide_rank ? 295 : 495,
+    width,
     height,
     colors: {
       titleColor,

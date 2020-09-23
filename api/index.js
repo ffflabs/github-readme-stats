@@ -26,6 +26,7 @@ module.exports = async (req, res) => {
     text_color,
     bg_color,
     theme,
+    card_width,
     cache_seconds,
   } = req.query;
   let stats;
@@ -64,6 +65,7 @@ module.exports = async (req, res) => {
         icon_color,
         text_color,
         bg_color,
+        card_width,
         theme,
       })
     );

@@ -80,6 +80,7 @@ const renderWakatimeCard = (stats = {}, options = { hide: [] }) => {
     bg_color,
     theme = "default",
     hide_progress,
+    card_width,
     langs_count=0
   } = options;
 
@@ -119,10 +120,11 @@ const renderWakatimeCard = (stats = {}, options = { hide: [] }) => {
     textColor,
     iconColor,
   });
+  let width = isNaN(card_width) ? (hide_progress? 310 : 495) : card_width;
 
   const card = new Card({
     title: "Wakatime week stats",
-    width: hide_progress? 315 : 495,
+    width,
     height,
     colors: {
       titleColor,

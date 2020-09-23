@@ -21,6 +21,7 @@ module.exports = async (req, res) => {
     cache_seconds,
     hide_title,
     hide_progress,
+    card_width,
     langs_count
   } = req.query;
 
@@ -52,6 +53,7 @@ module.exports = async (req, res) => {
         bg_color,
         theme,
         hide_progress,
+        card_width,
         langs_count
       })
     );
