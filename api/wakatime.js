@@ -21,6 +21,7 @@ module.exports = async (req, res) => {
     cache_seconds,
     hide_title,
     hide_progress,
+    langs_count
   } = req.query;
 
   res.setHeader("Content-Type", "image/svg+xml");
@@ -51,6 +52,7 @@ module.exports = async (req, res) => {
         bg_color,
         theme,
         hide_progress,
+        langs_count
       })
     );
   } catch (err) {

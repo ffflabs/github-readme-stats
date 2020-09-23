@@ -80,6 +80,7 @@ const renderWakatimeCard = (stats = {}, options = { hide: [] }) => {
     bg_color,
     theme = "default",
     hide_progress,
+    langs_count=0
   } = options;
 
   const lheight = parseInt(line_height, 10);
@@ -106,7 +107,7 @@ const renderWakatimeCard = (stats = {}, options = { hide: [] }) => {
             progressBarBackgroundColor: textColor,
             hideProgress: hide_progress,
           });
-        })
+        }).slice(0,langs_count)
     : [];
 
   // Calculate the card height depending on how many items there are
@@ -121,7 +122,7 @@ const renderWakatimeCard = (stats = {}, options = { hide: [] }) => {
 
   const card = new Card({
     title: "Wakatime week stats",
-    width: 495,
+    width: hide_progress? 315 : 495,
     height,
     colors: {
       titleColor,
